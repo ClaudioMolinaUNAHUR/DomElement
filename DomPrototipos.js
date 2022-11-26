@@ -143,25 +143,25 @@ con sus estilos completos (los propios y heredados), de forma similar a
 toString (pero con tooooooodos los estilos).
 */
 //-----FUNCION PARA GENERAR LAS HERENCIAS----
-const buildHierarchy = (node) => {
-    for (let i = 0; i < node.children.length; i++) {      
-        node.children.forEach( child => {
+DomElement.prototype.buildHierarchy = function(){
+    for (let i = 0; i < this.children.length; i++) {      
+        this.children.forEach( child => {
             //--itero el children , y si algun estilo del padre no esta en el hijo, se agrega 
-            for (key in node.styles){
+            for (key in this.styles){
                 if(!child.styles.hasOwnProperty(`${key}`)){
                     let styles = child.styles
-                    let atributo = node.styles[key]
+                    let atributo = this.styles[key]
                     child.styles = {...styles,[key]: atributo} //conservo todos los estilos declarado, y reemplazo cuando no tengo alguno
                 }
             }                
         });
-    buildHierarchy(node.children[i]);
+    this.children[i].buildHierarchy();
     }
 };
 
 DomElement.prototype.getStyle = function (type){
     let self = this
-    buildHierarchy(self);
+    this.buildHierarchy();
     const get = (type, node, result = '') => {
         for (let i = 0; i < node.children.length; i++) {
             if (node.children[i].type == type){
@@ -178,8 +178,7 @@ DomElement.prototype.getStyle = function (type){
 //console.log(dom.getStyle('h1'))
 
 DomElement.prototype.viewStyleHierarchy = function (){
-    let self = this
-    buildHierarchy(self);
+    this.buildHierarchy();
     return this.toString();
 };
 //-------TEST---------
@@ -319,3 +318,5 @@ DomElement.prototype.display = function(){
 
 // dom.children[1].children[0].children[0].children[2].contents = 'soy el p siguiente'
 // console.log(dom.display())
+
+console.log(DomElement.prototype)
