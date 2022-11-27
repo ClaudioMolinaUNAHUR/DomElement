@@ -164,7 +164,8 @@ DomElement.prototype.addStyle = function(defNodos, styles){
     let self = this;
     const put = (arrayNodos, nodo, toCompare = ' ', search = true) => {
         for (let i = 0; i < nodo.children.length; i++) {
-            if(search){
+            if(arrayNodos[0] == this.type || search){
+                search = true
                 for (let j = 0; j < arrayNodos.length; j++) {                
                     if(arrayNodos[j] == nodo.children[i].type){
                         toCompare += nodo.children[i].type + " ";
@@ -173,8 +174,10 @@ DomElement.prototype.addStyle = function(defNodos, styles){
             };
             if(defNodos == toCompare.trim()){
                 nodo.children.forEach(child => child.type == arrayNodos[arrayNodos.length-1] ? child.styles = styles : child);
+                toCompare = ''
                 search = false;
             }
+            
             put(arrayNodos, nodo.children[i], toCompare, search);      
         };
     };
@@ -182,8 +185,12 @@ DomElement.prototype.addStyle = function(defNodos, styles){
 };
 //---------TEST----------
 // dom.addStyle('body section', {
+//     color: 'yellow',
+//     size: 1
+// })
+// dom.addStyle('p', {
 //     color: 'green',
-//     size: 25
+//     size: 10
 // })
 // dom.addStyle('body section p', {
 //     color: 'red',
