@@ -160,26 +160,26 @@ DomElement.prototype.buildHierarchy = function(){
 };
 
 DomElement.prototype.addStyle = function(defNodos, styles){
-    var arrayNodos = defNodos.split(' ')
-    let self = this
+    var arrayNodos = defNodos.split(' ');
+    let self = this;
     const put = (arrayNodos, nodo, toCompare = ' ', search = true) => {
         for (let i = 0; i < nodo.children.length; i++) {
             if(search){
                 for (let j = 0; j < arrayNodos.length; j++) {                
                     if(arrayNodos[j] == nodo.children[i].type){
                         toCompare += nodo.children[i].type + " ";
-                    }
-                }
-            }
+                    };
+                };
+            };
             if(defNodos == toCompare.trim()){
-                nodo.children.forEach(child => child.type == arrayNodos[arrayNodos.length-1] ? child.styles = styles : child)
-                search = false
-            }               
+                nodo.children.forEach(child => child.type == arrayNodos[arrayNodos.length-1] ? child.styles = styles : child);
+                search = false;
+            }
             put(arrayNodos, nodo.children[i], toCompare, search);      
-        }
-    }
+        };
+    };
     put(arrayNodos, self);
-}
+};
 //---------TEST----------
 // dom.addStyle('body section', {
 //     color: 'green',
