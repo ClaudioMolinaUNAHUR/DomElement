@@ -166,7 +166,7 @@ DomElement.prototype.addStyle = function(defNodos,styles){
         for (let i = 0; i < nodo.children.length; i++) {
             for (let j = 0; j < arrayNodos.length; j++) {
                 if(compare == toCompare.trim()){
-                    nodo.styles = styles
+                    nodo.children[i].styles = styles
                 }else{
                     if(arrayNodos[j] == nodo.children[i].type){
                         toCompare += nodo.children[i].type + " "
@@ -179,7 +179,7 @@ DomElement.prototype.addStyle = function(defNodos,styles){
     put(arrayNodos, self, defNodos)
 }
 //---------TEST----------
-// dom.addStyle('body section', {
+// dom.addStyle('body section p', {
 //     color: 'green',
 //     size: 25
 // })
