@@ -165,7 +165,6 @@ DomElement.prototype.addStyle = function(defNodos, styles){
     const put = (arrayNodos, nodo, toCompare = ' ') => {
         for (let i = 0; i < nodo.children.length; i++) {
             for (let j = 0; j < arrayNodos.length; j++) {
-                console.log(defNodos == toCompare.trim())
                 if(defNodos == toCompare.trim()){
                     nodo.children[i].styles = styles
                 }else if(arrayNodos[j] == nodo.children[i].type){
