@@ -159,27 +159,26 @@ DomElement.prototype.buildHierarchy = function(){
     }
 };
 
-DomElement.prototype.addStyle = function(defNodos,styles){
+DomElement.prototype.addStyle = function(defNodos, styles){
     var arrayNodos = defNodos.split(' ')
     let self = this
-    const put = (arrayNodos, nodo, compare, toCompare = '') => {
+    const put = (arrayNodos, nodo, toCompare = ' ') => {
         for (let i = 0; i < nodo.children.length; i++) {
             for (let j = 0; j < arrayNodos.length; j++) {
-                if(compare == toCompare.trim()){
+                console.log(defNodos == toCompare.trim())
+                if(defNodos == toCompare.trim()){
                     nodo.children[i].styles = styles
-                }else{
-                    if(arrayNodos[j] == nodo.children[i].type){
-                        toCompare += nodo.children[i].type + " "
-                    }
-                    put(arrayNodos, nodo.children[i], compare, toCompare)
-                }                
-            }            
+                }else if(arrayNodos[j] == nodo.children[i].type){
+                    toCompare += nodo.children[i].type + " "
+                }
+            }                
+            put(arrayNodos, nodo.children[i], toCompare)             
         }
     }
-    put(arrayNodos, self, defNodos)
+    put(arrayNodos, self)
 }
 //---------TEST----------
-// dom.addStyle('body section p', {
+// dom.addStyle('body section', {
 //     color: 'green',
 //     size: 25
 // })
