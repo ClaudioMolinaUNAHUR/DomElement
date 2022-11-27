@@ -172,7 +172,7 @@ DomElement.prototype.addStyle = function(defNodos, styles){
                 }
             }
             if(defNodos == toCompare.trim()){
-                nodo.children.forEach(child => {if(child.type == arrayNodos[arrayNodos.length-1]) {child.styles = styles}})
+                nodo.children.forEach(child => child.type == arrayNodos[arrayNodos.length-1] ? child.styles = styles : child)
                 search = false
             }               
             put(arrayNodos, nodo.children[i], toCompare, search);      
@@ -181,15 +181,15 @@ DomElement.prototype.addStyle = function(defNodos, styles){
     put(arrayNodos, self);
 }
 //---------TEST----------
-dom.addStyle('body section', {
-    color: 'green',
-    size: 25
-})
-dom.addStyle('body section p', {
-    color: 'red',
-    size: 17
-})
-console.log(dom.toString())
+// dom.addStyle('body section', {
+//     color: 'green',
+//     size: 25
+// })
+// dom.addStyle('body section p', {
+//     color: 'red',
+//     size: 17
+// })
+// console.log(dom.toString())
 
 
 DomElement.prototype.getStyle = function (type){
