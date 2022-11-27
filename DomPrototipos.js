@@ -159,6 +159,33 @@ DomElement.prototype.buildHierarchy = function(){
     }
 };
 
+DomElement.prototype.addStyle = function(defNodos,styles){
+    var arrayNodos = defNodos.split(' ')
+    let self = this
+    const put = (arrayNodos, nodo, compare, toCompare = '') => {
+        for (let i = 0; i < nodo.children.length; i++) {
+            for (let j = 0; j < arrayNodos.length; j++) {
+                if(compare == toCompare.trim()){
+                    nodo.styles = styles
+                }else{
+                    if(arrayNodos[j] == nodo.children[i].type){
+                        toCompare += nodo.children[i].type + " "
+                    }
+                    put(arrayNodos, nodo.children[i], compare, toCompare)
+                }                
+            }            
+        }
+    }
+    put(arrayNodos, self, defNodos)
+}
+//---------TEST----------
+// dom.addStyle('body section', {
+//     color: 'green',
+//     size: 25
+// })
+// console.log(dom.toString())
+
+
 DomElement.prototype.getStyle = function (type){
     let self = this
     this.buildHierarchy();
@@ -319,4 +346,4 @@ DomElement.prototype.display = function(){
 // dom.children[1].children[0].children[0].children[2].contents = 'soy el p siguiente'
 // console.log(dom.display())
 
-console.log(DomElement.prototype)
+//console.log(DomElement.prototype)
